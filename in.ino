@@ -1,5 +1,5 @@
 
-//-----HC06---------ARdDUINO--------L298N--------POWER 12V-5V--------MOTOR-
+//-----HC06---------ARDUINO--------L298N--------POWER 12V-5V--------MOTOR--
 //-------------------------------- 12V ---------- 5V 12V ------------------
 //----------------- VIN ---------- 5V -------------------------------------
 //---- GND -------- GND ---------- GND ---------- 0V ----------------------
@@ -21,12 +21,12 @@
 
 // Khai báo chân
 // Motor Left
-#define IN4 12//L
+#define IN4 12  //L
 #define IN3 11
 #define ENB 10
 // Motor Right
 #define ENA 9
-#define IN2 8//R
+#define IN2 8  //R
 #define IN1 7
 
 // Tốc độ
@@ -35,19 +35,28 @@
 
 char command;
 
-void setup(){
+void setup() {
   Serial.begin(9600);
-  
-  pinMode(ENB, OUTPUT);pinMode(IN4, OUTPUT);pinMode(IN3, OUTPUT);
-  pinMode(ENA, OUTPUT);pinMode(IN1, OUTPUT);pinMode(IN2, OUTPUT);
-  pinMode(BUZ, OUTPUT);pinMode(LED_WIFI, OUTPUT);pinMode(LED, OUTPUT);
-  analogWrite(ENB, SPEED);digitalWrite(IN4, LOW);digitalWrite(IN3, LOW);
-  analogWrite(ENA, SPEED);digitalWrite(IN1, LOW);digitalWrite(IN2, LOW);
+
+  pinMode(ENB, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  analogWrite(ENB, SPEED);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  analogWrite(ENA, SPEED);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+}
 
 void loop() {
-    if (Serial.available() > 0) { // Nếu có dữ liệu nhận được từ mySerial 
-    command = Serial.read(); // Đọc dữ liệu nhận được và lưu vào biến value 
-    Serial.println(command); // In ra màn hình serial dữ liệu nhận được
+  if (Serial.available() > 0)  // Nếu có dữ liệu nhận được từ mySerial
+  {
+    command = Serial.read();  // Đọc dữ liệu nhận được và lưu vào biến value
+    Serial.println(command);  // In ra màn hình serial dữ liệu nhận được
   }
 
   if (command == "F") {
@@ -78,41 +87,77 @@ void loop() {
     Stop();
     Serial.println("Stop");
   }
-  
 }
+
 void Forward() {
-  analogWrite(ENB, SPEED);digitalWrite(IN4, LOW);digitalWrite(IN3, HIGH);
-  analogWrite(ENA, SPEED);digitalWrite(IN1, LOW);digitalWrite(IN2, HIGH);
+  analogWrite(ENB, SPEED);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, HIGH);
+  analogWrite(ENA, SPEED);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
 }
 void Backward() {
-  analogWrite(ENB, SPEED);digitalWrite(IN4, HIGH);digitalWrite(IN3, LOW);
-  analogWrite(ENA, SPEED);digitalWrite(IN1, HIGH);digitalWrite(IN2, LOW);
+  analogWrite(ENB, SPEED);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, LOW);
+  analogWrite(ENA, SPEED);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
 }
 void TurnRight() {
-  analogWrite(ENB, SPEED);digitalWrite(IN4, LOW);digitalWrite(IN3, HIGH);
-  analogWrite(ENA, SPEED);digitalWrite(IN1, HIGH);digitalWrite(IN2, LOW);
+  analogWrite(ENB, SPEED);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, HIGH);
+  analogWrite(ENA, SPEED);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
 }
 void TurnLeft() {
-  analogWrite(ENB, SPEED);digitalWrite(IN4, HIGH);digitalWrite(IN3, LOW);
-  analogWrite(ENA, SPEED);digitalWrite(IN1, LOW);digitalWrite(IN2, HIGH);
+  analogWrite(ENB, SPEED);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, LOW);
+  analogWrite(ENA, SPEED);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
 }
 void ForwardLeft() {
-  analogWrite(ENB, SPEED / speed_Coeff);digitalWrite(IN4, LOW);digitalWrite(IN3, HIGH);
-  analogWrite(ENA, SPEED);digitalWrite(IN1, LOW);digitalWrite(IN2, HIGH);
+  analogWrite(ENB, SPEED / speed_Coeff);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, HIGH);
+  analogWrite(ENA, SPEED);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
 }
 void BackwardLeft() {
-  analogWrite(ENB, SPEED / speed_Coeff);digitalWrite(IN4, HIGH);digitalWrite(IN3, LOW);
-  analogWrite(ENA, SPEED);digitalWrite(IN1, HIGH);digitalWrite(IN2, LOW);
+  analogWrite(ENB, SPEED / speed_Coeff);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, LOW);
+  analogWrite(ENA, SPEED);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
 }
 void ForwardRight() {
-  analogWrite(ENB, SPEED);digitalWrite(IN4, LOW);digitalWrite(IN3, HIGH);
-  analogWrite(ENA, SPEED / speed_Coeff);digitalWrite(IN1, LOW);digitalWrite(IN2, HIGH);
+  analogWrite(ENB, SPEED);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, HIGH);
+  analogWrite(ENA, SPEED / speed_Coeff);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
 }
 void BackwardRight() {
-  analogWrite(ENB, SPEED);digitalWrite(IN4, HIGH);digitalWrite(IN3, LOW);
-  analogWrite(ENA, SPEED / speed_Coeff);digitalWrite(IN1, HIGH);digitalWrite(IN2, LOW);
+  analogWrite(ENB, SPEED);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, LOW);
+  analogWrite(ENA, SPEED / speed_Coeff);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
 }
 void Stop() {
-  analogWrite(ENB,0);digitalWrite(IN4, LOW);digitalWrite(IN3, LOW);
-  analogWrite(ENA,0);digitalWrite(IN1, LOW);digitalWrite(IN2, LOW);
+  analogWrite(ENB, 0);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  analogWrite(ENA, 0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
 }
